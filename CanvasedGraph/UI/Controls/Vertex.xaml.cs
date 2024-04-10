@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -15,7 +14,7 @@ using CanvasedGraph.Helper;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace CanvasedGraph.UI.Controls;
+namespace CanvasedGraph;
 public sealed partial class Vertex : UserControl, INotifyPropertyChanged
 {
     // INPUT PROPS
@@ -292,7 +291,7 @@ public sealed partial class Vertex : UserControl, INotifyPropertyChanged
     // FLYOUT EVENTS
     private async void FlyoutRenameButton_Click(object sender, RoutedEventArgs e)
     {
-        var content = new SingleInputDialog();
+        var content = new UI.Controls.SingleInputDialog();
         var dialog = new ContentDialog();
 
         dialog.XamlRoot = this.XamlRoot;
