@@ -456,22 +456,13 @@ public class Constructor
     public Graph ToRaw()
     {
         var graph = new Graph();
-        var start = GetStartNode();
-        var end = GetEndNode();
 
         // Формируем граф
         // Добавим все вершины
         foreach (var node in Nodes)
         {
             graph.AddNode(new Node(node.Title));
-            if (node == start)
-            {
-                graph.Nodes.Last().SubState = Enums.NodeSubState.Start;
-            }
-            else if (node == end)
-            {
-                graph.Nodes.Last().SubState = Enums.NodeSubState.End;
-            }
+            graph.Nodes.Last().SubState = node.SubState;
         }
         // Добавим все связи
         foreach (var edge in Edges)
