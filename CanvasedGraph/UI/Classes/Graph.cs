@@ -453,7 +453,7 @@ public class Constructor
     }
 
     // RAW GRAPH THINGS
-    public Graph GetRawGraph()
+    public Graph ToRaw()
     {
         var graph = new Graph();
         var start = GetStartNode();
