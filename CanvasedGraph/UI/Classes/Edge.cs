@@ -281,7 +281,11 @@ public class Edge
     // WEIGHT INPUT BOX METHODS
     public void RelocateTextBox()
     {
-        var point = GetArrowStartPoint(20);
+        var point = GetArrowStartPoint(0);
+        if (Graph.Oriented)
+        {
+            point = GetArrowStartPoint(20);
+        }
         Canvas.SetLeft(WeightBox, point.X - (WeightBox.ActualWidth > 0 ? WeightBox.ActualWidth / 2 : DefaultTextBoxSize.X / 2));
         Canvas.SetTop(WeightBox, point.Y - (WeightBox.ActualHeight > 0 ? WeightBox.ActualHeight / 2 : DefaultTextBoxSize.Y / 2));
         Canvas.SetZIndex(WeightBox, 5);
