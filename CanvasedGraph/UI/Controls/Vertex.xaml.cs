@@ -294,13 +294,13 @@ public sealed partial class Vertex : UserControl, INotifyPropertyChanged
         var content = new UI.Controls.SingleInputDialog();
         var dialog = new ContentDialog();
 
-        dialog.XamlRoot = this.XamlRoot;
+        dialog.XamlRoot = XamlRoot;
         dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.Title = "Ïåðåèìåíîâàòü âåðøèíó";
-        dialog.PrimaryButtonText = "Ãîòîâî";
-        dialog.CloseButtonText = "Îòìåíà";
+        dialog.Title = "Rename";
+        dialog.PrimaryButtonText = "Apply";
+        dialog.CloseButtonText = "Close";
         dialog.DefaultButton = ContentDialogButton.Primary;
-        content.Placeholder = "Ââåäèòå íîâîå èìÿ";
+        content.Placeholder = Name;
         dialog.Content = content;
 
         var result = await dialog.ShowAsync();
