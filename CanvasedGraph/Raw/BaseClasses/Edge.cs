@@ -2,7 +2,7 @@
 using System;
 
 namespace CanvasedGraph.Raw;
-public class Edge : IEdge, IComparable<Edge>
+public class Edge : IEdge
 {
     public Node Left;
     public Node Right;
@@ -21,9 +21,15 @@ public class Edge : IEdge, IComparable<Edge>
 
     }
 
-    public int CompareTo(Edge? other)
+    //public int CompareTo(Edge? other)
+    //{
+    //    //if (other == null) return -1;
+    //    //return Right.Name.CompareTo(other.Right.Name);
+    //    return Weight.CompareTo(other.Weight);
+    //}
+
+    public override string ToString()
     {
-        if (other == null) return -1;
-        return Right.Name.CompareTo(other.Right.Name);
+        return $"{Left} -> {Weight} -> {Right}";
     }
 }
