@@ -33,34 +33,34 @@
                 <Button x:Name="FlyoutConnectButton" Click="FlyoutConnectButton_Click" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <SymbolIcon Symbol="Link"/>
-                        <TextBlock Text="Соединить"/>
+                        <TextBlock Text="Connect"/>
                     </StackPanel>
                 </Button>
                 <Button x:Name="FlyoutLoopButton" Click="FlyoutLoopButton_Click"  HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <SymbolIcon Symbol="RepeatOne"/>
-                        <TextBlock Text="Добавить петлю"/>
+                        <TextBlock Text="Loop"/>
                     </StackPanel>
                 </Button>
-                <DropDownButton Content="Изменить тип" HorizontalAlignment="Stretch">
+                <DropDownButton Content="Change type" HorizontalAlignment="Stretch">
                     <DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem x:Name="MakeMeDefault" Text="Обычная" Click="MakeMeDefault_Click"/>
-                            <MenuFlyoutItem x:Name="MakeMeStart" Text="Начальная" Click="MakeMeStart_Click"/>
-                            <MenuFlyoutItem x:Name="MakeMeEnd" Text="Конечная" Click="MakeMeEnd_Click"/>
+                            <MenuFlyoutItem x:Name="MakeMeDefault" Text="Default" Click="MakeMeDefault_Click"/>
+                            <MenuFlyoutItem x:Name="MakeMeStart" Text="Start" Click="MakeMeStart_Click"/>
+                            <MenuFlyoutItem x:Name="MakeMeEnd" Text="Final" Click="MakeMeEnd_Click"/>
                         </MenuFlyout>
                     </DropDownButton.Flyout>
                 </DropDownButton>
                 <Button x:Name="FlyoutRenameButton" Click="FlyoutRenameButton_Click" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <SymbolIcon Symbol="Edit"/>
-                        <TextBlock Text="Переименовать"/>
+                        <TextBlock Text="Rename"/>
                     </StackPanel>
                 </Button>
                 <Button x:Name="FlyoutDeleteButton" Click="FlyoutDeleteButton_Click" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <SymbolIcon Symbol="Delete"/>
-                        <TextBlock Text="Удалить"/>
+                        <TextBlock Text="Delete"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
