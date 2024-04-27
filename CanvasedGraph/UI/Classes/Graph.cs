@@ -27,6 +27,7 @@ public class Constructor
 
     // FLAGS
     public bool ReadOnly = false;
+    public bool Oriented = false;
 
     // OTHERS
     public List<Vertex> Nodes => Canvas.Children.Where(x => x is Vertex).Cast<Vertex>().ToList();
@@ -231,13 +232,16 @@ public class Constructor
     {
         var edge = new Edge(left, right, weight, this);
         Edges.Add(edge);
-        foreach (var edgee in Edges)
+        if (Oriented)
         {
-            if (edgee.Left == edge.Right && edgee.Right == edge.Left && !edge.IsLoop)
+            foreach (var edgee in Edges)
             {
-                edgee.ToArc();
-                edge.ToArc();
-                break;
+                if (edgee.Left == edge.Right && edgee.Right == edge.Left && !edge.IsLoop)
+                {
+                    edgee.ToArc();
+                    edge.ToArc();
+                    break;
+                }
             }
         }
         edge.UpdatePath();
@@ -405,17 +409,37 @@ public class Constructor
     }
     public bool IsEdgeExists(Edge edge)
     {
-        foreach (var edgee in Edges)
+        if (Oriented)
         {
-            if (edgee.Left == edge.Left && edgee.Right == edge.Right) return true;
+            foreach (var edgee in Edges)
+            {
+                if (edgee.Left == edge.Left && edgee.Right == edge.Right) return true;
+            }
+        }
+        else
+        {
+            foreach (var edgee in Edges)
+            {
+                if (edgee.Left == edge.Left && edgee.Right == edge.Right || edgee.Left == edge.Right && edgee.Right == edge.Left) return true;
+            }
         }
         return false;
     }
     public bool IsEdgeExists(Vertex left, Vertex right)
     {
-        foreach (var edgee in Edges)
+        if (Oriented)
         {
-            if (edgee.Left == left && edgee.Right == right) return true;
+            foreach (var edgee in Edges)
+            {
+                if (edgee.Left == left && edgee.Right == right) return true;
+            }
+        }
+        else
+        {
+            foreach (var edgee in Edges)
+            {
+                if (edgee.Left == left && edgee.Right == right || edgee.Left == right && edgee.Right == left) return true;
+            }
         }
         return false;
     }
@@ -455,7 +479,7 @@ public class Constructor
     // RAW GRAPH THINGS
     public Graph ToRaw()
     {
-        var graph = new Graph();
+        var graph = new Graph() { Oriented=Oriented };
 
         // Формируем граф
         // Добавим все вершины
@@ -471,7 +495,7 @@ public class Constructor
             var node2 = graph.GetNode(edge.Right.Title);
             if (!graph.IsConnectionExists(node1, node2))
             {
-                node1.Connect(node2, edge.Weight, true);
+                node1.Connect(node2, edge.Weight, Oriented);
             }
         }
 
@@ -511,6 +535,7 @@ public class Constructor
     {
         var s = new RawGraphStruct();
 
+        s.Oriented = Oriented;
         s.Nodes = new();
         s.States = new();
         s.Edges = new();
@@ -564,6 +589,7 @@ public class Constructor
                 g = JsonConvert.DeserializeObject<RawGraphStruct>(json);
                 try
                 {
+                    Oriented = g.Oriented;
                     foreach (var name in g.Nodes.Keys)
                     {
                         NewNode(g.Nodes[name][0], g.Nodes[name][1], name);

@@ -120,7 +120,7 @@ public class Edge
         // All figures ready to be set
         var geometryGroup = new GeometryGroup(); // Create geomtry group to contain all geometry objects
         geometryGroup.Children.Add(arcGeometry); // Add arc geomtry group
-        geometryGroup.Children.Add(arrowGeometry); // Add arrow geomtry group
+        if (Graph.Oriented) geometryGroup.Children.Add(arrowGeometry); // Add arrow geomtry group
         path.Data = geometryGroup; // Set geometryGroup as Data of Path object
         PathObject = path; // Save path object in edge
 

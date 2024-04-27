@@ -7,6 +7,7 @@ public class Graph : IGraph
 {
     public List<Node> Nodes;
     public bool IsEmpty => Nodes.Count == 0;
+    public bool Oriented = false;
 
     public Graph()
     {
@@ -18,7 +19,7 @@ public class Graph : IGraph
         var l = GetNode(left);
         var r = GetNode(right);
         if (l == null || r == null) return;
-        l.Connect(r, w, true);
+        l.Connect(r, w, Oriented);
     }
     public void AddNode(Node node)
     {
