@@ -25,9 +25,8 @@ public class Node : INode, IComparable<Node>
         }
         else
         {
-            var edge = new Edge(this, to, weight);
-            Edges.Add(edge);
-            to.Edges.Add(edge);
+            Edges.Add(new Edge(this, to, weight));
+            to.Edges.Add(new Edge(to, this, weight));
         }
     }
     public void Disconnect(Node node)

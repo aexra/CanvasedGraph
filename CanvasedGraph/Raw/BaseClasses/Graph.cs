@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CanvasedGraph.Raw.Interfaces;
 
 namespace CanvasedGraph.Raw;
@@ -44,9 +45,20 @@ public class Graph : IGraph
     }
     public bool IsConnectionExists(Node node1, Node node2)
     {
-        foreach (var edge in node1.Edges)
+        if (Oriented)
         {
-            if (edge.Right == node2) return true;
+            foreach (var edge in node1.Edges)
+            {
+                if (edge.Right == node2) return true;
+            }
+        }
+        else
+        {
+            var edges = node1.Edges.Concat(node2.Edges).ToList();
+            foreach (var edge in edges)
+            {
+                if (edge.Left == node1 && edge.Right == node2 || edge.Left == node2 && edge.Right == node1) return true;
+            }
         }
         return false;
     }
@@ -54,10 +66,22 @@ public class Graph : IGraph
     {
         var node1 = GetNode(name1);
         var node2 = GetNode(name2);
-        foreach (var edge in node1.Edges)
+        if (Oriented)
         {
-            if (edge.Right == node2) return true;
+            foreach (var edge in node1.Edges)
+            {
+                if (edge.Right == node2) return true;
+            }
         }
+        else
+        {
+            var edges = node1.Edges.Concat(node2.Edges).ToList();
+            foreach (var edge in edges)
+            {
+                if (edge.Left == node1 && edge.Right == node2 || edge.Left == node2 && edge.Right == node1) return true;
+            }
+        }
+        
         return false;
     }
     public Node? GetStartNode()
