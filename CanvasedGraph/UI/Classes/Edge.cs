@@ -21,6 +21,20 @@ public class Edge
     private readonly Brush DefaultStrokeBrush = new SolidColorBrush(Color.FromArgb(DefaultPathStrokeColor.A, DefaultPathStrokeColor.R, DefaultPathStrokeColor.G, DefaultPathStrokeColor.B));
     private readonly Brush HoverStrokeBrush = new SolidColorBrush(Color.FromArgb(255, 100, 149, 237));
 
+    // BRUSHES
+    public Brush StrokeBrush
+    {
+        get => PathObject.Stroke;
+        set 
+        {
+            if (value != PathObject.Stroke)
+            {
+                PathObject.Stroke = value;
+                UpdatePath();
+            }
+        }
+    }
+
     // INPUT PROPS
     private readonly Constructor Graph;
     public Vertex Left;
@@ -78,6 +92,10 @@ public class Edge
         };
 
         CalculateArcSize();
+
+        UpdatePath();
+
+        StrokeBrush = DefaultStrokeBrush;
     }
 
     // EDGE MANIPULATION METHODS
