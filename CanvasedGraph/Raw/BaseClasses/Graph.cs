@@ -136,11 +136,10 @@ public class Graph : IGraph
     {
         var output = "Граф";
 
-        foreach (var node in Nodes)
+        foreach (var node in Nodes.OrderBy(n => n.Name))
         {
             output += $"\n{node.Name}:";
-            var sorted_edges = node.Edges;
-            sorted_edges.Sort();
+            var sorted_edges = node.Edges.OrderBy(e => e.Left.Name);
             foreach (var edge in sorted_edges)
             {
                 output += $" {edge.Right.Name}({edge.Weight});";
